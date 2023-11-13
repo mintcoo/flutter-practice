@@ -110,7 +110,7 @@ No issues found!가 출력 되면 다 됐습니다
 // 파워셀(관리자) 창에서 내가 원하는 디렉토리를 찾아가서 명령어를 만들어야한다
 // cd c:\ 로 루트디렉토리로 간다음 ls로 목록보면서 찾아가자
 flutter create 프로젝트이름
-하면 생성이 된다
+하면 생성이 된다.
 ```
 
 ![image-20231109133846842](C:\Users\han\Desktop\FlutterPractice\assets\image-20231109133846842.png)
