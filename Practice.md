@@ -109,6 +109,7 @@ No issues found!가 출력 되면 다 됐습니다
 ```javascript
 // 파워셀(관리자) 창에서 내가 원하는 디렉토리를 찾아가서 명령어를 만들어야한다
 // cd c:\ 로 루트디렉토리로 간다음 ls로 목록보면서 찾아가자
+// C:\Users\han\Desktop\FlutterPractice\toonflix
 flutter create 프로젝트이름
 하면 생성이 된다.
 ```
@@ -127,3 +128,27 @@ dart extension도 설치
 ![image-20231109145543735](C:\Users\han\Desktop\FlutterPractice\assets\image-20231109145543735.png)
 
 - vs 코드 오른쪽 아래 Windows 저부분 누르면 여러 에물레이터 바꾸기 가능(웹, 윈도우, 맥북이면 맥, 안드로이드스튜디오 모바일등)
+
+## Flutter Widget
+
+- 모든 것은 위젯이다. 블록처럼 위젯에 위젯을 쌓아가며 앱을 만드는 것.
+- 위젯은 외우지 말고 찾아보며 사용하자. https://docs.flutter.dev/development/ui/widgets
+- 모든 위젯은 build 메서드를 사용해야한다.(build 또한 자동 완성 가능)
+- ![image-20231114143515436](C:\Users\han\Desktop\FlutterPractice\assets\image-20231114143515436.png)
+- 모든 앱은 CupertinoApp(ios디자인) 혹은 MaterialApp(구글디자인) 중에 선택해야 하는데 (앱의 root 디자인 테마라서 필히 선택), materialapp이 훨씬 보기 좋으니 MaterialApp을 쓰자.
+- 모든 화면은 Scaffold(구조)를 가져야 한다.
+- vs코드에서는 class 만들때마다 , 붙이면 자동정렬해줌
+- ![image-20231114145519962](C:\Users\han\Desktop\FlutterPractice\assets\image-20231114145519962.png)
+
+![image-20231114150111198](C:\Users\han\Desktop\FlutterPractice\assets\image-20231114150111198.png)
+
+- widget안에 widget들로 구성
+- appBar와 body의 센터구성하는 방법 차이보자
+- 그런데 appBar에는 body처럼 해도 중앙정렬 가능
+
+```dart
+home: Scaffold()
+는 dart에서 배운 named constructor parameter 이다. 이게 뭐냐면 클래스나 함수가 인자를 받을 때 순서가 아닌 이름을 대상으로 받을 때 사용한다.
+실제로 Scaffold()에 마우스를 올려보면 {} 를 사용해서 코딩이 되어있다.
+```
+
