@@ -12,9 +12,15 @@ class App extends StatelessWidget {
         appBar: AppBar(
           title: Text("Hello Flutter!!"),
           centerTitle: true,
+          backgroundColor: Colors.deepPurple,
+          shadowColor: Colors.red,
+          elevation: 10,
         ),
         body: Center(
-          child: Text("hello World!"),
+          child: Text(
+            "Hello WORLD",
+            style: TextStyle(color: Colors.cyan, fontWeight: FontWeight.bold, fontSize: 30),
+          ),
         ),
       ),
     );
