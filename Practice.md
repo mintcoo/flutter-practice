@@ -272,5 +272,53 @@ class App extends StatelessWidget {
   }
 }
 // 여기까지 수평 수직 및 패딩, 정렬, 스타일등 배움
+// 위, 아래로 놓고싶을땐 colunm 좌,우는 row
+// padding: EdgeInsets << 이걸 선택해서 주자
+```
+
+### Flutter Develop Tools
+
+![image-20231115171234404](C:\Users\han\Desktop\FlutterPractice\assets\image-20231115171234404.png)
+
+오른쪽 위 메뉴바에서 제일 오른쪽 파란아이콘 누르면 개발자모드
+
+나의 scaffold 구조와 함께 미리보기도 제공
+
+![image-20231115171428452](C:\Users\han\Desktop\FlutterPractice\assets\image-20231115171428452.png)
+
+- 왼쪽위에 전구 클릭후 휴대폰화면에서 직접 클릭을통해
+- widget을 직접 선택이 가능하다
+
+![image-20231115171602575](C:\Users\han\Desktop\FlutterPractice\assets\image-20231115171602575.png)
+
+### Buttons Section
+
+- Container는 Div같은거다
+
+```dart
+Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius: BorderRadius.circular(45),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 20,
+                          horizontal: 50,
+                        ),
+                        child: Text(
+                          "Transfer",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                )
+   // 왼쪽 노란색 버튼 만듬
+   // decoration사용과 borderRadius등 사용
 ```
 
