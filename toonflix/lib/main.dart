@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
+  const App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          backgroundColor: Color(0xFF181818),
+          backgroundColor: const Color(0xFF181818),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
                 Row(
@@ -24,7 +26,7 @@ class App extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text("Hey, Cinna",
+                        const Text("Hey, Cinna",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,
@@ -39,7 +41,7 @@ class App extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 80,
                 ),
                 Text(
@@ -49,10 +51,10 @@ class App extends StatelessWidget {
                     fontSize: 22,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
-                Text(
+                const Text(
                   "\$7 747 777",
                   style: TextStyle(
                     color: Colors.white,
@@ -60,7 +62,7 @@ class App extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 Row(
@@ -70,7 +72,7 @@ class App extends StatelessWidget {
                         color: Colors.amber,
                         borderRadius: BorderRadius.circular(45),
                       ),
-                      child: Padding(
+                      child: const Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: 20,
                           horizontal: 50,

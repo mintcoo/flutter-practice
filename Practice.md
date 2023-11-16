@@ -322,3 +322,22 @@ Row(
    // decoration사용과 borderRadius등 사용
 ```
 
+### VS Code setting
+
+![image-20231116131302524](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116131302524.png)
+
+- 파란줄이 뜨는 이유는 compile최적화를 위해 const 상수로 해주는게 좋기때문 
+
+```dart
+"editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+
+// open users settings json파일로 가서 위의 코드를 적어주고 저장하면 파란줄 다 사라지고 const여야 하는곳은 자동으로 다 됨
+"dart.previewFlutterUiGuides": true,
+// 이 옵션은 vs코드 재실행하면 부모가 무엇인지 알려주는 가이드라인이 생김
+
+
+// 플러터 외 다른 프로젝트에서 source.fixAll을 하고 싶지 않을 수도 있으니 알고있자
+```
+
