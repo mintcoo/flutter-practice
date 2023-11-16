@@ -510,3 +510,33 @@ Container(
     // 아이콘 추가 전 왼쪽부분 작업
 ```
 
+### Icons & Transforms
+
+![image-20231116173657135](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116173657135.png)
+
+- 아이콘들이 엄청 많고 미리보기도 제공
+
+![image-20231116174643935](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116174643935.png)
+
+transform.scale을 통해서 아이콘 오버스케일 만듬
+
+```dart
+기존 아이콘 코드를 code actions을 통해서
+widget으로 wrap해주고 transform.translate로 씌워줌       Transform.scale(
+    scale: 2,
+    child: Transform.translate(
+      offset: const Offset(0, 20),
+      child: const Icon(
+        Icons.euro_rounded,
+        color: Colors.white,
+        size: 80,
+      ),
+    ),
+  )
+// 그리고 offset이 필수로 필요해서 offset 좌우 상하 값 입력
+    
+// transform.scale == 크기 변경
+// transform.translate == 위치 변경
+// clipBehavior == overflow 되었을때 container가 어떻게 할지 clip.HardEdge를 통해 넘쳐난곳 다 자름
+```
+
