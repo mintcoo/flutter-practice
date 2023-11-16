@@ -447,3 +447,66 @@ Button(
 // 필요한 값을 미리 알고 정하기때문에 const
 ```
 
+### Cards
+
+![image-20231116153707235](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116153707235.png)
+
+- 위 부분 자꾸 에러가 나서 살펴보니 위의 Row의 const를 없애주어야한다
+
+- !! 중요한게 자동완성 때문에 이런 에러가 날 수도 있으니 잘보자
+
+```dart
+Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: const Color(0xFF1F2123),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(30),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Euro",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 32,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Text(
+                                "6, 428",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "EUR",
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.8),
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              )
+    // 아이콘 추가 전 왼쪽부분 작업
+```
+
