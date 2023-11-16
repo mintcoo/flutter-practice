@@ -329,15 +329,121 @@ Row(
 - 파란줄이 뜨는 이유는 compile최적화를 위해 const 상수로 해주는게 좋기때문 
 
 ```dart
-"editor.codeActionsOnSave": {
+  "[dart]": {
+    "editor.codeActionsOnSave": {
       "source.fixAll": true
-    },
-
-// open users settings json파일로 가서 위의 코드를 적어주고 저장하면 파란줄 다 사라지고 const여야 하는곳은 자동으로 다 됨
+    }, 
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+  },
+// open users settings json파일로 가서 위의 코드를 적어주고 저장하면 파란줄 다 사라지고 const여야 하는곳은 자동으로 다 됨, 저장할때 자동 코드 포맷도
 "dart.previewFlutterUiGuides": true,
 // 이 옵션은 vs코드 재실행하면 부모가 무엇인지 알려주는 가이드라인이 생김
 
 
 // 플러터 외 다른 프로젝트에서 source.fixAll을 하고 싶지 않을 수도 있으니 알고있자
+```
+
+### Code Actions
+
+- 왼쪽 전구를 클릭해서 실행
+- 코드 덩어리 묶음을
+
+![image-20231116134813487](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116134813487.png)
+
+![image-20231116134832167](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116134832167.png)
+
+- 이런식으로 요소들을 한번에 원하는 widget으로 감쌀수있음
+- widget 지우기도 가능
+- 커서를 두고 단축키를 사용해서 열면된다 기본 (Ctrl + .)
+
+![image-20231116141140550](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116141140550.png)
+
+- 코드 에러를 더 잘 볼 수있는 extentions 설치
+
+### Reusable
+
+- 위젯 재사용
+
+![image-20231116143145908](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116143145908.png)
+
+- 코드 작성 익숙해지고 이렇게 재사용을 해보는거 좋음
+- 지금은 수동으로 폴더 만들고 해보자
+
+![image-20231116143553182](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116143553182.png)
+
+- 이런식으로 만들고 위젯 만들때 stateless 치면 자동완성 해주는게 있는데 우선은 수동으로 만들어보자
+
+```dart
+import 'package:flutter/material.dart';
+
+class Button extends StatelessWidget {
+  final String text;
+  final Color textColor;
+  final Color bgColor;
+
+  const Button(
+      {super.key,
+      required this.text,
+      required this.textColor,
+      required this.bgColor});
+  // 위에처럼 바꿔주기위한 프로퍼티와 생성자함수 설정
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF1F2123),
+        borderRadius: BorderRadius.circular(45),
+      ),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 45,
+        ),
+        child: Text(
+          "Request",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
+        ),
+      ),
+    );
+  }
+}
+// button.dart 파일에 만든 나의 button 위젯
+```
+
+![image-20231116144600349](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116144600349.png)
+
+- 하지만 생성자함수는 변수만 설정하고 저렇게 code Actions으로
+
+![image-20231116144511203](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116144511203.png)
+
+- 바로 생성할 수 있다
+
+![image-20231116144841352](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116144841352.png)
+
+- 그리고 각 하드코딩한 값들을 변수로 바꿔주어야하는데
+- Padding에 const 때문에 더이상 const 값이 아닌 전송해오는 text값이 다르기 때문에 오류가나서 const지워주면 자동으로 vs코드가 아래처럼 const가 필요한곳으로 보정해줌
+
+![image-20231116144938560](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116144938560.png)
+
+![image-20231116145135333](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116145135333.png)
+
+- 만약 기존처럼 text와 color값을 딱 지정해주면 vs코드가 위의 스샷처럼 const여야 한다는걸 알려줌
+
+```dart
+Button(
+	text: "transfer",
+	textColor: Colors.black,
+	bgColor: Color(0XFFF1B33B)),
+Button(
+	text: "request",
+	textColor: Colors.white,
+	bgColor: Color(0xFF1F2123)),
+// 기존 Container를 없애고 내가 만든 Button으로 대체
+// 필요한 값을 미리 알고 정하기때문에 const
 ```
 
