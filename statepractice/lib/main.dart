@@ -12,45 +12,43 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int counter = 0;
-
-  void onClick() {
-    setState(() {
-      counter = counter + 1;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 243, 203, 188),
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+            color: Colors.red,
+          ),
+        ),
+      ),
+      home: const Scaffold(
+        backgroundColor: Color.fromARGB(255, 243, 203, 188),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Click Counter",
-                style: TextStyle(
-                  fontSize: 22,
-                ),
-              ),
-              Text(
-                '$counter',
-                style: const TextStyle(
-                  fontSize: 22,
-                ),
-              ),
-              IconButton(
-                iconSize: 40,
-                onPressed: onClick,
-                icon: const Icon(
-                  Icons.add_box_outlined,
-                ),
-              )
+              MyLargeTitle(),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class MyLargeTitle extends StatelessWidget {
+  const MyLargeTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      "My Large Title",
+      style: TextStyle(
+        fontSize: 22,
+        color: Theme.of(context).textTheme.titleLarge?.color,
       ),
     );
   }

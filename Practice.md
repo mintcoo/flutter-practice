@@ -754,3 +754,88 @@ class _MyAppState extends State<MyApp> {
   } // 이렇게 해도 작동은 한다 setState 호출할때마다 메서드가 한번더 호출받고 리렌더링 그런 개념인듯
 ```
 
+```dart
+class _MyAppState extends State<MyApp> {
+  List<int> numbers = [];
+
+  void onClick() {
+    setState(() {
+      numbers.add(numbers.length);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 243, 203, 188),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Click Counter",
+                style: TextStyle(
+                  fontSize: 22,
+                ),
+              ),
+              for (var n in numbers)
+                Text(
+                  '$n',
+                  style: const TextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+              IconButton(
+                iconSize: 40,
+                onPressed: onClick,
+                icon: const Icon(
+                  Icons.add_box_outlined,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+// for문 사용해서 리스트에 하나씩 추가해서 렌더링도가능
+```
+
+### BuilContext
+
+- Flutter는 앱의 모든 스타일을 한곳에서 관리가능하다 (색상, 크기, 글자 굵기등)
+
+```dart
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+            color: Colors.red,
+          ),
+        ),
+      ),
+// 저렇게 theme을 설정했는데 다른 위젯들이 여기에 접근하기위해 context가 필요하다
+class MyLargeTitle extends StatelessWidget {
+  const MyLargeTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      "My Large Title",
+      style: TextStyle(
+        fontSize: 22,
+        color: Theme.of(context).textTheme.titleLarge?.color,
+          // 여기처럼 부모루트의 context에 접근이 가능하다. 다만 null값 방지를위해 ! 확신이나 ? 있으면 사용등으로 적어주어야 한다
+      ),
+    );
+  }
+}
+```
+
