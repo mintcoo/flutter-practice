@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toonflix/widgets/button.dart';
+import 'package:toonflix/widgets/curreny_card.dart';
 
 void main() {
   runApp(const App());
@@ -82,7 +83,7 @@ class App extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 60,
+                height: 40,
               ),
               SizedBox(
                 height: 34,
@@ -112,68 +113,31 @@ class App extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: const Color(0xFF1F2123),
+              const CurrencyCard(
+                name: "Euro",
+                amount: "6 424",
+                code: "EUR",
+                icon: Icons.euro_rounded,
+                isInverted: false,
+              ),
+              Transform.translate(
+                offset: const Offset(0, -20),
+                child: const CurrencyCard(
+                  name: "Bitcoin",
+                  amount: "1 557",
+                  code: "BTC",
+                  icon: Icons.currency_bitcoin_rounded,
+                  isInverted: true,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Euro",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 32,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              const Text(
-                                "6, 428",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                "EUR",
-                                style: TextStyle(
-                                  color: Colors.white.withOpacity(0.8),
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                      Transform.scale(
-                        scale: 2,
-                        child: Transform.translate(
-                          offset: const Offset(5, 15),
-                          child: const Icon(
-                            Icons.euro_rounded,
-                            color: Colors.white,
-                            size: 80,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+              ),
+              Transform.translate(
+                offset: const Offset(0, -40),
+                child: const CurrencyCard(
+                  name: "Dollor",
+                  amount: "7 137",
+                  code: "USD",
+                  icon: Icons.attach_money_rounded,
+                  isInverted: false,
                 ),
               ),
             ],

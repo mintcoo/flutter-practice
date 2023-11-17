@@ -540,3 +540,131 @@ widget으로 wrap해주고 transform.translate로 씌워줌       Transform.scal
 // clipBehavior == overflow 되었을때 container가 어떻게 할지 clip.HardEdge를 통해 넘쳐난곳 다 자름
 ```
 
+### Reusable cards
+
+```dart
+import 'package:flutter/material.dart';
+
+class CurrencyCard extends StatelessWidget {
+  final String name, amount, code;
+  final IconData icon; // 타입은 아래서 마우스 올려보면 나옴
+  final bool isInverted; // 색상 반전을 위한것
+
+  final blackColor = const Color(0xFF1F2123); // 블랙컬러는 따로 정의해줘도됨
+
+  const CurrencyCard({
+    super.key,
+    required this.name,
+    required this.amount,
+    required this.code,
+    required this.icon,
+    required this.isInverted,
+  }); // 자동완성으로 만듬 생성자
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: isInverted ? Colors.white : blackColor,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(30),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: TextStyle(
+                    color: isInverted ? const Color(0xFF1F2123) : Colors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      amount,
+                      style: TextStyle(
+                        color:
+                            isInverted ? const Color(0xFF1F2123) : Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      code,
+                      style: TextStyle(
+                        color: isInverted
+                            ? const Color(0xFF1F2123)
+                            : Colors.white.withOpacity(0.8),
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            Transform.scale(
+              scale: 2,
+              child: Transform.translate(
+                offset: const Offset(5, 15),
+                child: Icon(
+                  icon,
+                  color: isInverted ? const Color(0xFF1F2123) : Colors.white,
+                  size: 80,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+// main.dart 에서는
+  const CurrencyCard(
+    name: "Euro",
+    amount: "6 424",
+    code: "EUR",
+    icon: Icons.euro_rounded,
+    isInverted: false,
+  ),
+  Transform.translate(
+    offset: const Offset(0, -20),
+    child: const CurrencyCard(
+      name: "Bitcoin",
+      amount: "1 557",
+      code: "BTC",
+      icon: Icons.currency_bitcoin_rounded,
+      isInverted: true,
+    ),
+  ),
+  Transform.translate(
+    offset: const Offset(0, -40),
+    child: const CurrencyCard(
+      name: "Dollor",
+      amount: "7 137",
+      code: "USD",
+      icon: Icons.attach_money_rounded,
+      isInverted: false,
+    ),
+  ),
+// 이런식으로 만들어준다
+```
+
+- 화면이 넘쳐흐를떈 제일처음의 home의 padding 위젯을 SingleChildScrollView 위젯으로 감싸우면 화면넘어가는걸 스크롤링 할 수 있게된다
+
+![image-20231117140439365](C:\Users\han\Desktop\FlutterPractice\assets\image-20231117140439365.png)
