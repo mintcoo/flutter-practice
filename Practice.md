@@ -668,3 +668,89 @@ class CurrencyCard extends StatelessWidget {
 - 화면이 넘쳐흐를떈 제일처음의 home의 padding 위젯을 SingleChildScrollView 위젯으로 감싸우면 화면넘어가는걸 스크롤링 할 수 있게된다
 
 ![image-20231117140439365](C:\Users\han\Desktop\FlutterPractice\assets\image-20231117140439365.png)
+
+![image-20231117141753881](C:\Users\han\Desktop\FlutterPractice\assets\image-20231117141753881.png)
+
+- 코드챌린지로 currency_card.dart 안에 translate값을 받아서 적용할 수 있게 넣어준다
+
+## StateFul Widget
+
+- statepractice 폴더에서 새로진행
+- 그동안은 stateless 아무런 데이터 없이 위젯으로 변경되지 않을 ui출력해줄 뿐인데
+- stateful은 위젯에 데이터를 담고 실시간 데이터 변화 보여줌
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int counter = 0;
+
+  void onClick() {
+    counter = counter + 1;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 243, 203, 188),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Click Counter",
+                style: TextStyle(
+                  fontSize: 22,
+                ),
+              ),
+              Text(
+                '$counter',
+                style: const TextStyle(
+                  fontSize: 22,
+                ),
+              ),
+              IconButton(
+                iconSize: 40,
+                onPressed: onClick,
+                icon: const Icon(
+                  Icons.add_box_outlined,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+// 기존 코드인데 작동이 클릭해도 +1이 되지않는다 다음챕터에서..
+```
+
+### setState
+
+```dart
+  void onClick() {
+    setState(() {
+      counter = counter + 1;
+    });
+  }
+// 상태가 변화하면 알려주고 그러면 다시 렌더링 하기때문에 그역할을 위한 setState함수 안에 넣는다
+// 그런데 변화하는 데이터는 setState에 무조건 넣어야만 하는건 아니지만 넣어서 가독성 좋게 하는걸 권장
+  void onClick() {
+     counter = counter + 1;
+    setState((){}))
+  } // 이렇게 해도 작동은 한다 setState 호출할때마다 메서드가 한번더 호출받고 리렌더링 그런 개념인듯
+```
+
