@@ -839,3 +839,58 @@ class MyLargeTitle extends StatelessWidget {
 }
 ```
 
+### Widget Lifecycle
+
+flutter의 생명주기
+
+1. initState()
+
+   build를 하기 전에 항상 먼저 실행된다.
+
+   오직 단 한번만 실행된다
+
+   대표적으로 API를 불러올 때 사용된다.
+
+2. dispose()
+   화면에서 사라질 때 실행한다.
+
+![image-20231117170516987](C:\Users\han\Desktop\FlutterPractice\assets\image-20231117170516987.png)
+
+- 눈을 깜빡일때마다 아래 콘솔창처럼 생성되고 사라지고한다
+
+```dart
+class MyLargeTitle extends StatefulWidget {
+  const MyLargeTitle({
+    super.key,
+  });
+
+  @override
+  State<MyLargeTitle> createState() => _MyLargeTitleState();
+}
+
+class _MyLargeTitleState extends State<MyLargeTitle> {
+  @override
+  void initState() {
+    super.initState();
+    print("처음 생성할때 build 전");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("위젯 사라질때");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      "My Large Title",
+      style: TextStyle(
+        fontSize: 22,
+        color: Theme.of(context).textTheme.titleLarge?.color,
+      ),
+    );
+  }
+}
+```
+
