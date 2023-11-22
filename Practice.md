@@ -1155,5 +1155,47 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+
+
+
+  void onRestart() {
+    timer.cancel();
+    setState(() {
+      totalSeconds = twentyFiveMinutes;
+      isRunning = false;
+    });
+  }
+// 이건 재시작 함수
+
+          Flexible(
+            flex: 2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  iconSize: 120,
+                  color: Theme.of(context).cardColor,
+                  onPressed: isRunning ? onPausePressed : onStartPressed,
+                  icon: Icon(
+                    isRunning
+                        ? Icons.pause_circle_outlined
+                        : Icons.play_circle_outlined,
+                  ),
+                ),
+                Transform.translate(
+                  offset: const Offset(0, -10),
+                  child: IconButton(
+                    iconSize: 35,
+                    color: Theme.of(context).textTheme.displayLarge!.color,
+                    onPressed: onRestart,
+                    icon: const Icon(
+                      Icons.restore,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+// 재시작 버튼을 이렇게 만들어주었다
 ```
 
