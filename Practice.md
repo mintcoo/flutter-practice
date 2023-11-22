@@ -894,3 +894,233 @@ class _MyLargeTitleState extends State<MyLargeTitle> {
 }
 ```
 
+## Pomodoro APP
+
+- statePractice 폴더에서 진행 
+- 기존main.dart 주석처리하고 진행했음
+
+### User Interface
+
+- Flexible은 하나의 공간이 얼마만큼의 비율을 차지할지 정할 수 있다
+
+![image-20231122160936727](C:\Users\han\Desktop\FlutterPractice\assets\image-20231122160936727.png)
+
+```dart
+// home_screen.dart 코드
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: Column(
+        children: [
+          Flexible(
+            flex: 1,
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                "25:00",
+                style: TextStyle(
+                  color: Theme.of(context).cardColor,
+                  fontSize: 89,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 2,
+            child: Center(
+                child: IconButton(
+              iconSize: 120,
+              color: Theme.of(context).cardColor,
+              onPressed: () {},
+              icon: const Icon(Icons.play_circle_outline_outlined),
+            )),
+          ),
+          Flexible(
+            flex: 1,
+            child: Row(
+              children: [
+                Expanded(
+// 위에 Row로 한번 씌워주고 여기 Expanded를 통해 화면끝까지 확장
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Pomodoros",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color:
+                                Theme.of(context).textTheme.displayLarge!.color,
+                          ),
+                        ),
+                        Text(
+                          "0",
+                          style: TextStyle(
+                            fontSize: 58,
+                            fontWeight: FontWeight.w600,
+                            color:
+                                Theme.of(context).textTheme.displayLarge!.color,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+```
+
+### Timer
+
+![image-20231122165517079](C:\Users\han\Desktop\FlutterPractice\assets\image-20231122165517079.png)
+
+- Timer 함수는 dart 기본 제공인데 사용자가 누를때만 초기화하기위해서 late를 사용한다
+
+```dart
+import 'package:flutter/material.dart';
+import 'dart:async';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int totalSeconds = 1500;
+
+  bool isRunning = false;
+
+  late Timer timer;
+  // import 'dart:async' 해줘야 Timer가 불러와진다
+
+  void onTick(Timer timer) {
+    setState(() {
+      totalSeconds -= 1;
+    });
+  }
+
+  void onStartPressed() {
+    timer = Timer.periodic(const Duration(seconds: 1), onTick);
+    // onTick 다음 ()안하는 이유는 내가 실행이아니라 Timer 함수가 대신 실행해줄거라서
+    setState(() {
+      isRunning = true;
+    });
+  }
+
+  void onPausePressed() {
+    timer.cancel();
+    setState(() {
+      isRunning = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: Column(
+        children: [
+          Flexible(
+            flex: 1,
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                "$totalSeconds",
+                style: TextStyle(
+                  color: Theme.of(context).cardColor,
+                  fontSize: 89,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 2,
+            child: Center(
+                child: IconButton(
+              iconSize: 120,
+              color: Theme.of(context).cardColor,
+              onPressed: isRunning ? onPausePressed : onStartPressed,
+              icon: Icon(
+                isRunning
+                    ? Icons.pause_circle_outlined
+                    : Icons.play_circle_outlined,
+              ),
+            )),
+          ),
+          Flexible(
+            flex: 1,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                      ),
+                      color: Theme.of(context).cardColor,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Pomodoros",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color:
+                                Theme.of(context).textTheme.displayLarge!.color,
+                          ),
+                        ),
+                        Text(
+                          "0",
+                          style: TextStyle(
+                            fontSize: 58,
+                            fontWeight: FontWeight.w600,
+                            color:
+                                Theme.of(context).textTheme.displayLarge!.color,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+```
+
+- 재생과 멈출때 다른 함수 시키는 조건분기 잘 보자
