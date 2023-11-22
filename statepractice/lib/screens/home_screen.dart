@@ -9,7 +9,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int totalSeconds = 1500;
+  static const twentyFiveMinutes = 1500;
+  // 실수방지를 위한 변수 상수화
+  int totalSeconds = twentyFiveMinutes;
+  int totalPomodoros = 0;
 
   bool isRunning = false;
 
@@ -17,9 +20,24 @@ class _HomeScreenState extends State<HomeScreen> {
   // import 'dart:async' 해줘야 Timer가 불러와진다
 
   void onTick(Timer timer) {
-    setState(() {
-      totalSeconds -= 1;
-    });
+    if (totalSeconds == 0) {
+      setState(() {
+        totalPomodoros += 1;
+        totalSeconds = twentyFiveMinutes;
+        isRunning = false;
+      });
+      timer.cancel();
+    } else {
+      setState(() {
+        totalSeconds -= 1;
+      });
+    }
+  }
+
+  String format(int seconds) {
+    var duration = Duration(seconds: seconds);
+    // print(duration.toString().split(".")[0].substring(2, 7));
+    return duration.toString().substring(2, 7);
   }
 
   void onStartPressed() {
@@ -48,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               alignment: Alignment.bottomCenter,
               child: Text(
-                "$totalSeconds",
+                format(totalSeconds),
                 style: TextStyle(
                   color: Theme.of(context).cardColor,
                   fontSize: 89,
@@ -97,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Text(
-                          "0",
+                          "$totalPomodoros",
                           style: TextStyle(
                             fontSize: 58,
                             fontWeight: FontWeight.w600,

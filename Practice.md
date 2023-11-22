@@ -1124,3 +1124,36 @@ class _HomeScreenState extends State<HomeScreen> {
 ```
 
 - 재생과 멈출때 다른 함수 시키는 조건분기 잘 보자
+
+### Date Format
+
+![image-20231122173458323](C:\Users\han\Desktop\FlutterPractice\assets\image-20231122173458323.png)
+
+- duration 클래스를 이용해 시간으로 변화시켜서 분 초로 잘라냄
+
+```dart
+  String format(int seconds) {
+    var duration = Duration(seconds: seconds);
+    // print(duration.toString().substring(2, 7));
+    return duration.toString().substring(2, 7)[0].substring(2, 7);
+  }
+// 잘라내는 함수 만들어주고 return 값이 string으로 있기때문에 앞에 string 적어줌
+
+
+          Flexible(
+            flex: 1,
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                format(totalSeconds),
+                  // 이렇게 text부분엔 분초 return 해주는 함수로 대체해줌
+                style: TextStyle(
+                  color: Theme.of(context).cardColor,
+                  fontSize: 89,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+```
+
