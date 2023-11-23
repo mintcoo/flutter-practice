@@ -1199,3 +1199,75 @@ class _HomeScreenState extends State<HomeScreen> {
 // 재시작 버튼을 이렇게 만들어주었다
 ```
 
+## Webtoon APP
+
+### APP Bar
+
+```dart
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 2,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.green,
+        title: const Text(
+          "오늘의 웹툰",
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ),
+    );
+  }
+}
+// appBar를 만들어준다
+```
+
+### Data Fetching
+
+- Flutter나 Dart의 패키지를 찾고싶으면 pub.dev에서..
+- api요청을 위해 pub.dev에서 http 검색
+
+![image-20231123144535912](C:\Users\han\Desktop\FlutterPractice\assets\image-20231123144535912.png)
+
+- installing 가서 with dart 나 with flutter 커맨드라인 실행 또는
+
+![image-20231123144703210](C:\Users\han\Desktop\FlutterPractice\assets\image-20231123144703210.png)
+
+![image-20231123144820514](C:\Users\han\Desktop\FlutterPractice\assets\image-20231123144820514.png)
+
+- pubspec.yaml에는 다양한 설정가능
+- 이미지나 폰트를 설치하거나 다 적으면됨 주석되어있음
+
+![image-20231123144934865](C:\Users\han\Desktop\FlutterPractice\assets\image-20231123144934865.png)
+
+- 이렇게 저장가능
+
+- 그리고나서 추가로 flutter pub add http 해주자
+- (나는 flutter pub add http 해줘야 완벽하게 설치되었음)
+
+```dart
+import 'package:http/http.dart' as http;
+// as http 해주는이유는 아래 get등 함수를 좀더 구분잘해서 쓰기 위함
+
+class ApiService {
+  final String baseUrl = "https://webtoon-crawler.nomadcoders.workers.dev";
+  final String today = "today";
+
+  void getTodaysToons() {
+    http.get()
+    // 위에 as http로 import해와서 이렇게 사용
+  }
+}
+
+```
+
