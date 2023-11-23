@@ -1263,10 +1263,21 @@ class ApiService {
   final String baseUrl = "https://webtoon-crawler.nomadcoders.workers.dev";
   final String today = "today";
 
-  void getTodaysToons() {
-    http.get()
+  void getTodaysToons() async {
+    final url = Uri.parse("$baseUrl/$today");
+    // 뒤에 Uri 로 시작 유의
+    await http.get(url);
     // 위에 as http로 import해와서 이렇게 사용
+    // get보면 반환타입이 Future<response>임 이런 미래에 받을 결과값을 알려주는 타입은 await 사용
+    // Future는 기다렸다가 완료 되었을때 Response라는 타입을 반환할거라고 알려주는것
+    // 비동기처리를 위해 async await 사용해야함
+    // 즉 코드가 처리될때까지 기다리라는 소리
   }
+	if (response.statusCode == 200) {
+      print(response.body);
+      return;
+    }
+    throw Error();
 }
 
 ```
