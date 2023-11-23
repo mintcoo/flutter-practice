@@ -1282,3 +1282,106 @@ class ApiService {
 
 ```
 
+### FromJson
+
+- 받은 데이터들을 하나하나 dart와 flutter에서 쓸수있는 클래스를 만들어줘야함
+
+```dart
+// models 폴더 webtoon_model.dart 파일에
+class WebtoonModel {
+  final String title, thumb, id;
+
+  WebtoonModel({
+    required this.title,
+    required this.thumb,
+    required this.id,
+  });
+  // constructor를 자동완성이든 수동이든 만들어준다
+  // 자동완성은 변수위에 전구로 만듬
+}
+
+```
+
+```dart
+  void getTodaysToons() async {
+    final url = Uri.parse("$baseUrl/$today");
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> webtoons = jsonDecode(response.body);
+      // dynamic은 뭐든지 될수있는 타입
+      // 받아오는 데이터를 잘 보고(오브젝트로 이루어진 리스트 타입) 이렇게 텍스트로 된 응답 body를 json으로 디코딩 해주면서 데이터도 받자
+      return;
+    }
+    throw Error();
+  }
+```
+
+```dart
+// webtoon_model.dart
+// named constructor 사용
+class WebtoonModel {
+  final String title, thumb, id;
+
+  WebtoonModel.fromJson(Map<String, dynamic> json)
+                        // json은 그냥 map임 String이 key고 value가 dynamic인 Map임
+      : title = json['title'],
+        thumb = json['thumb'],
+        id = json['id'];
+  // 이런식으로 바꿔준다
+}
+
+// api_service.dart
+
+    if (response.statusCode == 200) {
+      final List<dynamic> webtoons = jsonDecode(response.body);
+      for (var webtoon in webtoons) {
+        final toon = WebtoonModel.fromJson(webtoon);
+        print(toon.title);
+        // 여기도 for문 돌리면서 이렇게 바꿔줌
+        // fromJson으로 named constructor를 받는데 flutter에서 매우 자주쓰임
+        // 그러면 이제 toon이란 변수로 받으면 title, thumb, id 접근가능
+      }
+      return;
+    }
+    throw Error();
+
+```
+
+```dart
+// api_service.dart  최종
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:webtoonapp/models/webtoon_model.dart';
+
+class ApiService {
+  final String baseUrl = "https://webtoon-crawler.nomadcoders.workers.dev";
+  final String today = "today";
+
+  Future<List<WebtoonModel>> getTodaysToons() async {
+  // 비동기라서 Future붙이고 List<WebtoonModel> 반환한다고 해줘야함
+    List<WebtoonModel> webtoonInstances = [];
+    // 웹툰 모델 만들고나서 나중에 빈걸로 변수 하나 만듬
+    final url = Uri.parse("$baseUrl/$today");
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> webtoons = jsonDecode(response.body);
+      for (var webtoon in webtoons) {
+        final toon = WebtoonModel.fromJson(webtoon);
+        webtoonInstances.add(toon);
+        // 위에서 만든 빈 리스트 변수에 담아준다
+      }
+      // print(webtoonInstances) << 이거 결과 아래 스샷
+      return webtoonInstances;
+      // for문 돌리고나서 webtoonInstances도 return해줌
+    }
+    throw Error();
+  }
+}
+
+```
+
+![image-20231123161403087](C:\Users\han\Desktop\FlutterPractice\assets\image-20231123161403087.png)
+
+- 프린트해보면 이렇게 WebtoonModel 인스턴스로 이뤄진 리스트가 나옴
