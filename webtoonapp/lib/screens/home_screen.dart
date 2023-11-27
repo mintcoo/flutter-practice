@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     waitForWebToons();
+    // initState에서 처음에 시작할때 데이터 받아오는 함수 실행
   }
 
   @override
