@@ -1385,3 +1385,7 @@ class ApiService {
 ![image-20231123161403087](C:\Users\han\Desktop\FlutterPractice\assets\image-20231123161403087.png)
 
 - 프린트해보면 이렇게 WebtoonModel 인스턴스로 이뤄진 리스트가 나옴!
+
+## waitForWebToons
+
+- Future를 보여주는 방법은 2가지가 있다
