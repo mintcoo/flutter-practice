@@ -1439,6 +1439,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-// 이게 첫번쨰 방법인데 기본적이지만 길고 복잡하다
+// 이게 첫번쨰 방법인데 기본적이지만 길고 복잡하다.
 ```
 
