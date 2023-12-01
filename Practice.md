@@ -1386,7 +1386,7 @@ class ApiService {
 
 - 프린트해보면 이렇게 WebtoonModel 인스턴스로 이뤄진 리스트가 나옴!
 
-## waitForWebToons
+### waitForWebToons
 
 - Future를 보여주는 방법은 2가지가 있다
 
@@ -1440,5 +1440,54 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 // 이게 첫번쨰 방법인데 기본적이지만 길고 복잡하다.
+```
+
+### Future Builder
+
+- 첫번째 방법도 좋지만 대부분  state를 사용하지않음
+- 좋은 widget과 프레임워크가 많음
+- 다시 코드 지워주고 stateless widget으로 바꿔줌
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:webtoonapp/models/webtoon_model.dart';
+import 'package:webtoonapp/services/api_service.dart';
+
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
+
+  Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 2,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.green,
+        title: const Text(
+          "오늘의 웹툰",
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ),
+      body: FutureBuilder(
+        future: webtoons,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+              // snapshot은 future의 상태임, 그래서 데이터가 있는지 여부 체크
+            return const Text("데이터 있음");
+          }
+          return const Text("아직 로딩");
+        },
+      ),
+    );
+  }
+}
+// 훨씬 간단해짐
 ```
 
