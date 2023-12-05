@@ -1491,3 +1491,76 @@ class HomeScreen extends StatelessWidget {
 // 훨씬 간단해짐
 ```
 
+### ListView
+
+```dart
+main.dart 파일에
+
+return MaterialApp(
+scrollBehavior: const MaterialScrollBehavior().copyWith(
+dragDevices: {
+PointerDeviceKind.mouse,
+PointerDeviceKind.touch,
+PointerDeviceKind.stylus,
+PointerDeviceKind.unknown
+},
+),
+home: HomeScreen(),
+);
+
+// 이렇게 추가해주면 웹과 안드로이드 모두 드래그 작동
+```
+
+
+
+- 많은 양의 데이터를 보여줄때 Col이나 Row는 적절하지 않다 ListView가 좋다
+
+![image-20231205143627250](C:\Users\han\Desktop\FlutterPractice\assets\image-20231205143627250.png)
+
+- ListView 가장 기본 사용법, 하지만 모든걸 한번에 로딩해서 좋지않다. 사용자가 보고있는것만 로딩해야함(최적화)
+- 그래서 ListView.builder를 사용
+
+```dart
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+                // 방향
+              itemCount: snapshot.data!.length,
+                // 보여지는 개수(숫자 입력하면 그 개수만)
+              itemBuilder: (context, index) {
+                var webtoon = snapshot.data![index];
+                // 인덱스를 통해 데이터 접근 가능
+                return Text(webtoon.title);
+              },
+            );
+          }
+```
+
+![image-20231205144732471](C:\Users\han\Desktop\FlutterPractice\assets\image-20231205144732471.png)
+
+- 이렇게 보여지는것만 로딩한다 매우 효율적
+
+#### Seperated
+
+- ListView 아이템들 사이사이에 넣어줄 구분해줄것들
+
+  ```dart
+  builder: (context, snapshot) {
+    if (snapshot.hasData) {
+      return ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: snapshot.data!.length,
+        itemBuilder: (context, index) {
+          var webtoon = snapshot.data![index];
+          return Text(webtoon.title);
+        },
+        separatorBuilder: (context, index) => const SizedBox(
+          width: 20,
+        ),
+          // 제목들 사이사이에 20칸의 너비가 들어간다
+      );
+    }
+  ```
+
+  
