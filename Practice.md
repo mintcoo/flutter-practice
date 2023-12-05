@@ -1564,3 +1564,101 @@ home: HomeScreen(),
   ```
 
   
+
+![image-20231205152237650](C:\Users\han\Desktop\FlutterPractice\assets\image-20231205152237650.png)
+
+- 이렇게 코드액션으로 extract method로 코드를 깔끔하게 뺄수있다
+
+```dart
+  body: FutureBuilder(
+    future: webtoons,
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        return Column(
+          children: [
+            const SizedBox(
+              height: 50,
+            ),
+            // 위쪽으로 50만큼 여백
+            Expanded(
+              child: makeList(snapshot),
+            )
+            // Expanded를 통해 남는 높이만큼을 자동으로 부여함 안그러면 높이를 알수 없어서 에러가 난다
+          ],
+        );
+      }
+```
+
+```dart
+  ListView makeList(AsyncSnapshot<List<WebtoonModel>> snapshot) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: snapshot.data!.length,
+      itemBuilder: (context, index) {
+        var webtoon = snapshot.data![index];
+        return Column(children: [
+          Image.network(webtoon.thumb),
+          // 이렇게 해서 이미지가 안뜨고 403에러 뜰때 해결방법 : https://gist.github.com/preinpost/941efd33dff90d9f8c7a208da40c18a9
+          Text(webtoon.title),
+        ]);
+      },
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 40,
+      ),
+    );
+  }
+```
+
+### Webtoon Cards
+
+```dart
+  ListView makeList(AsyncSnapshot<List<WebtoonModel>> snapshot) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      // 전체적으로 패딩을 줌
+      itemCount: snapshot.data!.length,
+      itemBuilder: (context, index) {
+        var webtoon = snapshot.data![index];
+        return Column(children: [
+          Container(
+            width: 250,
+            clipBehavior: Clip.hardEdge,
+            // 이걸해야 둥글게 이미지 잘림
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 10,
+                    offset: const Offset(7, 7),
+                    color: Colors.black.withOpacity(0.5),
+                  )
+                ]),
+              // 각각 이미지 그림자 주는법
+            child: Image.network(
+              webtoon.thumb,
+              headers: const {
+                "User-Agent":
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+              },
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            webtoon.title,
+            style: const TextStyle(
+              fontSize: 22,
+            ),
+          ),
+        ]);
+      },
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 40,
+      ),
+    );
+  }
+}
+```
+
