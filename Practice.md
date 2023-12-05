@@ -1662,3 +1662,25 @@ home: HomeScreen(),
 }
 ```
 
+### Detail Screen
+
+```dart
+@override
+Widget build(BuildContext context) {
+return GestureDetector(
+  // GestureDetector로 감싸준다
+  onTap: () {
+  // 클릭했을때
+    Navigator.push(
+      // 네비게이터 푸쉬를 통해 전환 애니메이션 효과까지 포함되어있다
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailWebtoon(webtoon: webtoon),
+       // DetailWebtoon 위젯을 렌더링하는거지만 새페이지처럼 전환효과와 함께 이동시켜줌
+       fullscreenDialog: true,
+       // 이 옵션은 애니메이션도 풀 스크린페이지처럼 해주고 뒤로가기가 아닌 x 버튼 활성화시킴
+      ),
+    );
+  },
+```
+
