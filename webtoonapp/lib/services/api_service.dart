@@ -48,14 +48,15 @@ class ApiService {
     // 에피소드들 가져오는 API
     List<WebtoonEpisodeModel> episodeInstances = [];
 
-    final url = Uri.parse("$baseUrl/$id");
+    final url = Uri.parse("$baseUrl/$id/episodes");
+    // 요청 주소 중요;; 이거때문에 오류 계속났음
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
       final episodes = jsonDecode(response.body);
+
       for (var episode in episodes) {
-        final epi = WebtoonEpisodeModel.fromJson(episode);
-        episodeInstances.add(epi);
+        episodeInstances.add(WebtoonEpisodeModel.fromJson(episode));
       }
       return episodeInstances;
     }
