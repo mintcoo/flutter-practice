@@ -1783,3 +1783,106 @@ class ApiService {
 // 두가지 api서비스를 만들어주고 각각 모델도 만들어줌
 ```
 
+### Futures
+
+![image-20231206165749207](C:\Users\han\Desktop\FlutterPractice\assets\image-20231206165749207.png)
+
+- 기존 방법으로는 id가 필요해서 접근이 불가해서 안되고 다른방법 써야함
+
+```dart
+import 'package:flutter/material.dart';
+
+import 'package:webtoonapp/models/webtoon_model.dart';
+
+class DetailWebtoon extends StatefulWidget {
+  // 1. StatefulWidget으로 바꾸면
+  final WebtoonModel webtoon;
+
+  const DetailWebtoon({
+    super.key,
+    required this.webtoon,
+  });
+
+  @override
+  State<DetailWebtoon> createState() => _DetailWebtoonState();
+}
+
+class _DetailWebtoonState extends State<DetailWebtoon> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 2,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.green,
+        title: Text(
+          widget.webtoon.title,
+          // 2. 이제 별개의 다른 클래스로 구분되어서 기존 webtoon.title에서 widget.webtoon.title로 바뀜
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ),
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 50,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Hero(
+                tag: widget.webtoon.id,
+                // 3. 여기도 마찬가지 widget이 붙음
+                child: Container(
+                  width: 250,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 10,
+                          offset: const Offset(7, 7),
+                          color: Colors.black.withOpacity(0.5),
+                        )
+                      ]),
+                  child: Image.network(
+                    widget.webtoon.thumb,
+                    headers: const {
+                      "User-Agent":
+                          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+```
+
+```dart
+class _DetailWebtoonState extends State<DetailWebtoon> {
+  late Future<WebtoonDetailModel> webtoonDetail;
+  late Future<List<WebtoonEpisodeModel>> webtoonEpisodes;
+// 이렇게 구분된 클래스에서 초기화를 해준다
+// late를 써서 우선 변수만 선언하고
+  @override
+  void initState() {
+    super.initState();
+    webtoonDetail = ApiService.getToonById(widget.webtoon.id);
+    webtoonEpisodes = ApiService.getEpisodesById(widget.webtoon.id);
+  // initState에서 할당해준다
+  // widget을 통해 접근해야함 다른 클래스라서
+  }
+    
+// @@ 홈스크린과는 다른 이유가 거기서는 따로 argument를 요구하지 않았기 때문에 그냥 쓸수있었지만 여기선 필요하므로
+```
+

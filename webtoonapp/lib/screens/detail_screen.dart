@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:webtoonapp/models/webtoon_detail_model.dart';
+import 'package:webtoonapp/models/webtoon_episode_model.dart';
+
 import 'package:webtoonapp/models/webtoon_model.dart';
 import 'package:webtoonapp/services/api_service.dart';
 
 class DetailWebtoon extends StatefulWidget {
   final WebtoonModel webtoon;
-  final String id;
 
   const DetailWebtoon({
     super.key,
     required this.webtoon,
-    required this.id,
   });
 
   @override
@@ -18,12 +18,14 @@ class DetailWebtoon extends StatefulWidget {
 }
 
 class _DetailWebtoonState extends State<DetailWebtoon> {
-  late final Future<WebtoonDetailModel> webtoonDetail;
+  late Future<WebtoonDetailModel> webtoonDetail;
+  late Future<List<WebtoonEpisodeModel>> webtoonEpisodes;
 
   @override
   void initState() {
     super.initState();
-    webtoonDetail = ApiService.getToonById(widget.id);
+    webtoonDetail = ApiService.getToonById(widget.webtoon.id);
+    webtoonEpisodes = ApiService.getEpisodesById(widget.webtoon.id);
   }
 
   @override
@@ -75,25 +77,6 @@ class _DetailWebtoonState extends State<DetailWebtoon> {
                 ),
               ),
             ],
-          ),
-          FutureBuilder(
-            future: webtoonDetail,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Column(
-                  children: [
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Text(snapshot.data!.genre),
-                  ],
-                );
-              }
-              return const Center(
-                child: CircularProgressIndicator(),
-                // 로딩할때 가운데 뜨는 프로그래스바
-              );
-            },
           ),
         ],
       ),
