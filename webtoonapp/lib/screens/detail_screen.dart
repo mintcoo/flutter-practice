@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:webtoonapp/models/webtoon_detail_model.dart';
 import 'package:webtoonapp/models/webtoon_model.dart';
+import 'package:webtoonapp/services/api_service.dart';
 
-class DetailWebtoon extends StatelessWidget {
+class DetailWebtoon extends StatefulWidget {
   final WebtoonModel webtoon;
+  final String id;
 
   const DetailWebtoon({
     super.key,
     required this.webtoon,
+    required this.id,
   });
+
+  @override
+  State<DetailWebtoon> createState() => _DetailWebtoonState();
+}
+
+class _DetailWebtoonState extends State<DetailWebtoon> {
+  late final Future<WebtoonDetailModel> webtoonDetail;
+
+  @override
+  void initState() {
+    super.initState();
+    webtoonDetail = ApiService.getToonById(widget.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +36,7 @@ class DetailWebtoon extends StatelessWidget {
         backgroundColor: Colors.white,
         foregroundColor: Colors.green,
         title: Text(
-          webtoon.title,
+          widget.webtoon.title,
           style: const TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.w400,
@@ -35,7 +52,7 @@ class DetailWebtoon extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Hero(
-                tag: webtoon.id,
+                tag: widget.webtoon.id,
                 child: Container(
                   width: 250,
                   clipBehavior: Clip.hardEdge,
@@ -49,7 +66,7 @@ class DetailWebtoon extends StatelessWidget {
                         )
                       ]),
                   child: Image.network(
-                    webtoon.thumb,
+                    widget.webtoon.thumb,
                     headers: const {
                       "User-Agent":
                           "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
@@ -58,6 +75,25 @@ class DetailWebtoon extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          FutureBuilder(
+            future: webtoonDetail,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  children: [
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Text(snapshot.data!.genre),
+                  ],
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+                // 로딩할때 가운데 뜨는 프로그래스바
+              );
+            },
           ),
         ],
       ),
