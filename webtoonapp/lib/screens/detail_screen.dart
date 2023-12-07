@@ -54,51 +54,49 @@ class _DetailWebtoonState extends State<DetailWebtoon> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 50,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Hero(
-                  tag: widget.webtoon.id,
-                  child: Container(
-                    width: 250,
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 10,
-                            offset: const Offset(7, 7),
-                            color: Colors.black.withOpacity(0.5),
-                          )
-                        ]),
-                    child: Image.network(
-                      widget.webtoon.thumb,
-                      headers: const {
-                        "User-Agent":
-                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
-                      },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 50,
+            vertical: 50,
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Hero(
+                    tag: widget.webtoon.id,
+                    child: Container(
+                      width: 250,
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 10,
+                              offset: const Offset(7, 7),
+                              color: Colors.black.withOpacity(0.5),
+                            )
+                          ]),
+                      child: Image.network(
+                        widget.webtoon.thumb,
+                        headers: const {
+                          "User-Agent":
+                              "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            FutureBuilder(
-              future: webtoonDetail,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 50,
-                    ),
-                    child: Column(
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              FutureBuilder(
+                future: webtoonDetail,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         GestureDetector(
@@ -123,17 +121,70 @@ class _DetailWebtoonState extends State<DetailWebtoon> {
                           ),
                         ),
                       ],
-                    ),
+                    );
+                  }
+                  return const Center(
+                    heightFactor: 3,
+                    child: CircularProgressIndicator(),
+                    // 로딩할때 가운데 뜨는 프로그래스바
                   );
-                }
-                return const Center(
-                  heightFactor: 3,
-                  child: CircularProgressIndicator(),
-                  // 로딩할때 가운데 뜨는 프로그래스바
-                );
-              },
-            )
-          ],
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              FutureBuilder(
+                future: webtoonEpisodes,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    // ListView를 안쓰는 이유는 오히려 신경쓸게 많기도 하고 10개정도의 가벼운 작업은 그냥 column이 낫다
+                    // 최적화가 필요하거나 리스트가 길거나하면 리스트뷰가 필수
+                    return Column(
+                      children: [
+                        for (var episode in snapshot.data!)
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 7),
+                            decoration: BoxDecoration(
+                                color: Colors.green.shade400,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 3,
+                                    offset: const Offset(3, 3),
+                                    color: Colors.black.withOpacity(0.5),
+                                  )
+                                ]),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 7),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    episode.title,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  const Icon(
+                                    Icons.arrow_circle_right_outlined,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                      ],
+                    );
+                  }
+                  return Container();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
