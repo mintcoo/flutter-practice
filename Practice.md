@@ -2065,3 +2065,58 @@ FutureBuilder(
 )
 ```
 
+### Episodes
+
+```dart
+FutureBuilder(
+future: webtoonEpisodes,
+builder: (context, snapshot) {
+  if (snapshot.hasData) {
+    // ListView를 안쓰는 이유는 오히려 신경쓸게 많기도 하고 10개정도의 가벼운 작업은 그냥 column이 낫다
+    // 최적화가 필요하거나 리스트가 길거나하면 리스트뷰가 필수
+    return Column(
+      children: [
+        for (var episode in snapshot.data!)
+          Container(
+            margin: const EdgeInsets.only(bottom: 7),
+            decoration: BoxDecoration(
+                color: Colors.green.shade400,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 3,
+                    offset: const Offset(3, 3),
+                    color: Colors.black.withOpacity(0.5),
+                  )
+                ]),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 15, vertical: 7),
+              child: Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    episode.title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const Icon(
+                    Icons.arrow_circle_right_outlined,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+            ),
+          )
+      ],
+    );
+  }
+  return Container();
+},
+),
+```
+
