@@ -2120,3 +2120,14 @@ builder: (context, snapshot) {
 ),
 ```
 
+## URL Launcher
+
+- Flutter 개발자들이 만든 url Launcher 설치해야함
+- AndroidManifest.xml 파일위치
+  .\android\app\src\main
+
+```dart
+<data android:scheme="https" />
+    이렇게 어떤 url종류인지 명시해준다
+```
+
