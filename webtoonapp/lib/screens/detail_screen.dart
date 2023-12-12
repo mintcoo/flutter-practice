@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webtoonapp/models/webtoon_detail_model.dart';
 import 'package:webtoonapp/models/webtoon_episode_model.dart';
 
@@ -22,6 +22,9 @@ class DetailWebtoon extends StatefulWidget {
 class _DetailWebtoonState extends State<DetailWebtoon> {
   late Future<WebtoonDetailModel> webtoonDetail;
   late Future<List<WebtoonEpisodeModel>> webtoonEpisodes;
+  late SharedPreferences prefs;
+  // 폰에 관리할 좋아요 목록
+  bool isLiked = false;
 
   bool isExpanded = false;
 
@@ -31,11 +34,44 @@ class _DetailWebtoonState extends State<DetailWebtoon> {
     });
   }
 
+  Future initPref() async {
+    prefs = await SharedPreferences.getInstance();
+    final likedToons = prefs.getStringList('likedToons');
+    if (likedToons != null) {
+      if (likedToons.contains(widget.webtoon.id) == true) {
+        setState(() {
+          // UI를 refresh 해줘야함
+          isLiked = true;
+        });
+      }
+    } else {
+      await prefs.setStringList("likedToons", []);
+      // 사용자가 처음 앱 실행시 만들어줌
+    }
+  }
+
+  onHeartTap() async {
+    final likedToons = prefs.getStringList('likedToons');
+    if (likedToons != null) {
+      if (isLiked) {
+        likedToons.remove(widget.webtoon.id);
+      } else {
+        likedToons.add(widget.webtoon.id);
+      }
+      await prefs.setStringList('likedToons', likedToons);
+      // 수정된 리스트를 폰에 다시 저장
+      setState(() {
+        isLiked = !isLiked;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     webtoonDetail = ApiService.getToonById(widget.webtoon.id);
     webtoonEpisodes = ApiService.getEpisodesById(widget.webtoon.id);
+    initPref();
   }
 
   @override
@@ -47,6 +83,14 @@ class _DetailWebtoonState extends State<DetailWebtoon> {
         elevation: 2,
         backgroundColor: Colors.white,
         foregroundColor: Colors.green,
+        actions: [
+          IconButton(
+            onPressed: onHeartTap,
+            icon: isLiked
+                ? const Icon(Icons.favorite)
+                : const Icon(Icons.favorite_outline_outlined),
+          ),
+        ],
         title: Text(
           widget.webtoon.title,
           style: const TextStyle(
