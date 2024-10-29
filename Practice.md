@@ -47,7 +47,10 @@ A. https://developer.android.com/studio 안드로이드 스튜디오를 설치�
 설치 방법 및 가이드는 따로 없습니다. 에러 관련 메시지는 해당 에러 메시지를 복사해 구글에 검색해보시면 쉽게 해결 방법을 찾을 수 있습니다.
 B. 자바 8버전 이상이 필요하고 환경 변수 설정이 필요합니다.
 [있으신 분들은 스킵, 없으신 분들은 설치해주시면 됩니다.]
-C. 안드로이드 스튜디오를 실행하고 우측 상단 점3개 혹은 Device Manager를 찾아주시면 됩니다.
+C. 안드로이드 스튜디오를 실행하고 -> 라이센스 전부 동의하고 그냥 설치 -> 설치 완료 후 첫화면에서 Plugins 에서 flutter 설치 -> 저새작후 그전에 이 블로그 글 확인 https://codingapple.com/unit/flutter-install-on-windows-and-mac/
+-> new flutter project 시작 하고 왼쪽에서 flutter 선택
+
+우측 상단 점3개 혹은 Device Manager를 찾아주시면 됩니다.
 그 후 Create Device를 클릭해 애뮬레이터를 설정해주시면 됩니다.
 [사용자마다 원하는 기기가 다르므로 원하시는 기기를 선택해주시면 됩니다.
 저는 Pixel 3 XL 모델을 선택했습니다. ]
@@ -109,12 +112,12 @@ No issues found!가 출력 되면 다 됐습니다
 ```javascript
 // 파워셀(관리자) 창에서 내가 원하는 디렉토리를 찾아가서 명령어를 만들어야한다
 // cd c:\ 로 루트디렉토리로 간다음 ls로 목록보면서 찾아가자
-// C:\Users\han\Desktop\FlutterPractice\toonflix
+// C:.\toonflix
 flutter create 프로젝트이름
 하면 생성이 된다.
 ```
 
-![image-20231109133846842](C:\Users\han\Desktop\FlutterPractice\assets\image-20231109133846842.png)
+![image-20231109133846842](C:.\assets\image-20231109133846842.png)
 
 ```javascript
 그다음 vs코드 실행후 flutter extention을 설치
@@ -125,7 +128,7 @@ dart extension도 설치
 
 ```
 
-![image-20231109145543735](C:\Users\han\Desktop\FlutterPractice\assets\image-20231109145543735.png)
+![image-20231109145543735](C:.\assets\image-20231109145543735.png)
 
 - vs 코드 오른쪽 아래 Windows 저부분 누르면 여러 에물레이터 바꾸기 가능(웹, 윈도우, 맥북이면 맥, 안드로이드스튜디오 모바일등)
 
@@ -137,7 +140,7 @@ dart extension도 설치
 
 - 모든 위젯은 build 메서드를 사용해야한다.(build 또한 자동 완성 가능)
 
-- ![image-20231114143515436](C:\Users\han\Desktop\FlutterPractice\assets\image-20231114143515436.png)
+- ![image-20231114143515436](C:.\assets\image-20231114143515436.png)
 
   ```dart
   void main() {
@@ -172,9 +175,9 @@ dart extension도 설치
 
 - vs코드에서는 class 만들때마다 , 붙이면 자동정렬해줌
 
-- ![image-20231114145519962](C:\Users\han\Desktop\FlutterPractice\assets\image-20231114145519962.png)
+- ![image-20231114145519962](C:.\assets\image-20231114145519962.png)
 
-![image-20231114150111198](C:\Users\han\Desktop\FlutterPractice\assets\image-20231114150111198.png)
+![image-20231114150111198](C:.\assets\image-20231114150111198.png)
 
 - widget안에 widget들로 구성
 - appBar와 body의 센터구성하는 방법 차이보자
@@ -186,18 +189,18 @@ home: Scaffold()
 실제로 Scaffold()에 마우스를 올려보면 {} 를 사용해서 코딩이 되어있다.
 ```
 
-![image-20231114154327366](C:\Users\han\Desktop\FlutterPractice\assets\image-20231114154327366.png)
+![image-20231114154327366](C:.\assets\image-20231114154327366.png)
 
 ### Dart Classes Recap
 
-![image-20231114160409751](C:\Users\han\Desktop\FlutterPractice\assets\image-20231114160409751.png)
+![image-20231114160409751](C:.\assets\image-20231114160409751.png)
 
-![image-20231114160538025](C:\Users\han\Desktop\FlutterPractice\assets\image-20231114160538025.png)
+![image-20231114160538025](C:.\assets\image-20231114160538025.png)
 
 - Text에 마우스 올려보면 data는 첫번째 파라미터로, required 필수고
 - ? 붙은것들은 있어도되고 없어도 되는것들
 
-![image-20231114160819382](C:\Users\han\Desktop\FlutterPractice\assets\image-20231114160819382.png)
+![image-20231114160819382](C:.\assets\image-20231114160819382.png)
 
 - 이렇게 필수로 넣어야하는것이 있는데 없으면 dart가 알려줌
 
@@ -228,7 +231,7 @@ class App extends StatelessWidget {
 
 ## Flutter UI
 
-![image-20231115145107288](C:\Users\han\Desktop\FlutterPractice\assets\image-20231115145107288.png)
+![image-20231115145107288](C:.\assets\image-20231115145107288.png)
 
 ```dart
 class App extends StatelessWidget {
@@ -278,18 +281,18 @@ class App extends StatelessWidget {
 
 ### Flutter Develop Tools
 
-![image-20231115171234404](C:\Users\han\Desktop\FlutterPractice\assets\image-20231115171234404.png)
+![image-20231115171234404](C:.\assets\image-20231115171234404.png)
 
 오른쪽 위 메뉴바에서 제일 오른쪽 파란아이콘 누르면 개발자모드
 
 나의 scaffold 구조와 함께 미리보기도 제공
 
-![image-20231115171428452](C:\Users\han\Desktop\FlutterPractice\assets\image-20231115171428452.png)
+![image-20231115171428452](C:.\assets\image-20231115171428452.png)
 
 - 왼쪽위에 전구 클릭후 휴대폰화면에서 직접 클릭을통해
 - widget을 직접 선택이 가능하다
 
-![image-20231115171602575](C:\Users\han\Desktop\FlutterPractice\assets\image-20231115171602575.png)
+![image-20231115171602575](C:.\assets\image-20231115171602575.png)
 
 ### Buttons Section
 
@@ -324,7 +327,7 @@ Row(
 
 ### VS Code setting
 
-![image-20231116131302524](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116131302524.png)
+![image-20231116131302524](C:.\assets\image-20231116131302524.png)
 
 - 파란줄이 뜨는 이유는 compile최적화를 위해 const 상수로 해주는게 좋기때문 
 
@@ -349,15 +352,15 @@ Row(
 - 왼쪽 전구를 클릭해서 실행
 - 코드 덩어리 묶음을
 
-![image-20231116134813487](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116134813487.png)
+![image-20231116134813487](C:.\assets\image-20231116134813487.png)
 
-![image-20231116134832167](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116134832167.png)
+![image-20231116134832167](C:.\assets\image-20231116134832167.png)
 
 - 이런식으로 요소들을 한번에 원하는 widget으로 감쌀수있음
 - widget 지우기도 가능
 - 커서를 두고 단축키를 사용해서 열면된다 기본 (Ctrl + .)
 
-![image-20231116141140550](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116141140550.png)
+![image-20231116141140550](C:.\assets\image-20231116141140550.png)
 
 - 코드 에러를 더 잘 볼 수있는 extentions 설치
 
@@ -365,12 +368,12 @@ Row(
 
 - 위젯 재사용
 
-![image-20231116143145908](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116143145908.png)
+![image-20231116143145908](C:.\assets\image-20231116143145908.png)
 
 - 코드 작성 익숙해지고 이렇게 재사용을 해보는거 좋음
 - 지금은 수동으로 폴더 만들고 해보자
 
-![image-20231116143553182](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116143553182.png)
+![image-20231116143553182](C:.\assets\image-20231116143553182.png)
 
 - 이런식으로 만들고 위젯 만들때 stateless 치면 자동완성 해주는게 있는데 우선은 수동으로 만들어보자
 
@@ -415,22 +418,22 @@ class Button extends StatelessWidget {
 // button.dart 파일에 만든 나의 button 위젯
 ```
 
-![image-20231116144600349](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116144600349.png)
+![image-20231116144600349](C:.\assets\image-20231116144600349.png)
 
 - 하지만 생성자함수는 변수만 설정하고 저렇게 code Actions으로
 
-![image-20231116144511203](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116144511203.png)
+![image-20231116144511203](C:.\assets\image-20231116144511203.png)
 
 - 바로 생성할 수 있다
 
-![image-20231116144841352](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116144841352.png)
+![image-20231116144841352](C:.\assets\image-20231116144841352.png)
 
 - 그리고 각 하드코딩한 값들을 변수로 바꿔주어야하는데
 - Padding에 const 때문에 더이상 const 값이 아닌 전송해오는 text값이 다르기 때문에 오류가나서 const지워주면 자동으로 vs코드가 아래처럼 const가 필요한곳으로 보정해줌
 
-![image-20231116144938560](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116144938560.png)
+![image-20231116144938560](C:.\assets\image-20231116144938560.png)
 
-![image-20231116145135333](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116145135333.png)
+![image-20231116145135333](C:.\assets\image-20231116145135333.png)
 
 - 만약 기존처럼 text와 color값을 딱 지정해주면 vs코드가 위의 스샷처럼 const여야 한다는걸 알려줌
 
@@ -449,7 +452,7 @@ Button(
 
 ### Cards
 
-![image-20231116153707235](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116153707235.png)
+![image-20231116153707235](C:.\assets\image-20231116153707235.png)
 
 - 위 부분 자꾸 에러가 나서 살펴보니 위의 Row의 const를 없애주어야한다
 
@@ -512,11 +515,11 @@ Container(
 
 ### Icons & Transforms
 
-![image-20231116173657135](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116173657135.png)
+![image-20231116173657135](C:.\assets\image-20231116173657135.png)
 
 - 아이콘들이 엄청 많고 미리보기도 제공
 
-![image-20231116174643935](C:\Users\han\Desktop\FlutterPractice\assets\image-20231116174643935.png)
+![image-20231116174643935](C:.\assets\image-20231116174643935.png)
 
 transform.scale을 통해서 아이콘 오버스케일 만듬
 
@@ -667,9 +670,9 @@ class CurrencyCard extends StatelessWidget {
 
 - 화면이 넘쳐흐를떈 제일처음의 home의 padding 위젯을 SingleChildScrollView 위젯으로 감싸우면 화면넘어가는걸 스크롤링 할 수 있게된다
 
-![image-20231117140439365](C:\Users\han\Desktop\FlutterPractice\assets\image-20231117140439365.png)
+![image-20231117140439365](C:.\assets\image-20231117140439365.png)
 
-![image-20231117141753881](C:\Users\han\Desktop\FlutterPractice\assets\image-20231117141753881.png)
+![image-20231117141753881](C:.\assets\image-20231117141753881.png)
 
 - 코드챌린지로 currency_card.dart 안에 translate값을 받아서 적용할 수 있게 넣어준다
 
@@ -854,7 +857,7 @@ flutter의 생명주기
 2. dispose()
    화면에서 사라질 때 실행한다.
 
-![image-20231117170516987](C:\Users\han\Desktop\FlutterPractice\assets\image-20231117170516987.png)
+![image-20231117170516987](C:.\assets\image-20231117170516987.png)
 
 - 눈을 깜빡일때마다 아래 콘솔창처럼 생성되고 사라지고한다
 
@@ -903,7 +906,7 @@ class _MyLargeTitleState extends State<MyLargeTitle> {
 
 - Flexible은 하나의 공간이 얼마만큼의 비율을 차지할지 정할 수 있다
 
-![image-20231122160936727](C:\Users\han\Desktop\FlutterPractice\assets\image-20231122160936727.png)
+![image-20231122160936727](C:.\assets\image-20231122160936727.png)
 
 ```dart
 // home_screen.dart 코드
@@ -996,7 +999,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 ### Timer
 
-![image-20231122165517079](C:\Users\han\Desktop\FlutterPractice\assets\image-20231122165517079.png)
+![image-20231122165517079](C:.\assets\image-20231122165517079.png)
 
 - Timer 함수는 dart 기본 제공인데 사용자가 누를때만 초기화하기위해서 late를 사용한다
 
@@ -1127,7 +1130,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 ### Date Format
 
-![image-20231122173458323](C:\Users\han\Desktop\FlutterPractice\assets\image-20231122173458323.png)
+![image-20231122173458323](C:.\assets\image-20231122173458323.png)
 
 - duration 클래스를 이용해 시간으로 변화시켜서 분 초로 잘라냄
 
@@ -1237,18 +1240,18 @@ class HomeScreen extends StatelessWidget {
 - Flutter나 Dart의 패키지를 찾고싶으면 pub.dev에서..
 - api요청을 위해 pub.dev에서 http 검색
 
-![image-20231123144535912](C:\Users\han\Desktop\FlutterPractice\assets\image-20231123144535912.png)
+![image-20231123144535912](C:.\assets\image-20231123144535912.png)
 
 - installing 가서 with dart 나 with flutter 커맨드라인 실행 또는
 
-![image-20231123144703210](C:\Users\han\Desktop\FlutterPractice\assets\image-20231123144703210.png)
+![image-20231123144703210](C:.\assets\image-20231123144703210.png)
 
-![image-20231123144820514](C:\Users\han\Desktop\FlutterPractice\assets\image-20231123144820514.png)
+![image-20231123144820514](C:.\assets\image-20231123144820514.png)
 
 - pubspec.yaml에는 다양한 설정가능
 - 이미지나 폰트를 설치하거나 다 적으면됨 주석되어있음
 
-![image-20231123144934865](C:\Users\han\Desktop\FlutterPractice\assets\image-20231123144934865.png)
+![image-20231123144934865](C:.\assets\image-20231123144934865.png)
 
 - 이렇게 저장가능
 
@@ -1382,7 +1385,7 @@ class ApiService {
 
 ```
 
-![image-20231123161403087](C:\Users\han\Desktop\FlutterPractice\assets\image-20231123161403087.png)
+![image-20231123161403087](C:.\assets\image-20231123161403087.png)
 
 - 프린트해보면 이렇게 WebtoonModel 인스턴스로 이뤄진 리스트가 나옴!
 
@@ -1515,7 +1518,7 @@ home: HomeScreen(),
 
 - 많은 양의 데이터를 보여줄때 Col이나 Row는 적절하지 않다 ListView가 좋다
 
-![image-20231205143627250](C:\Users\han\Desktop\FlutterPractice\assets\image-20231205143627250.png)
+![image-20231205143627250](C:.\assets\image-20231205143627250.png)
 
 - ListView 가장 기본 사용법, 하지만 모든걸 한번에 로딩해서 좋지않다. 사용자가 보고있는것만 로딩해야함(최적화)
 - 그래서 ListView.builder를 사용
@@ -1537,7 +1540,7 @@ home: HomeScreen(),
           }
 ```
 
-![image-20231205144732471](C:\Users\han\Desktop\FlutterPractice\assets\image-20231205144732471.png)
+![image-20231205144732471](C:.\assets\image-20231205144732471.png)
 
 - 이렇게 보여지는것만 로딩한다 매우 효율적
 
@@ -1565,7 +1568,7 @@ home: HomeScreen(),
 
   
 
-![image-20231205152237650](C:\Users\han\Desktop\FlutterPractice\assets\image-20231205152237650.png)
+![image-20231205152237650](C:.\assets\image-20231205152237650.png)
 
 - 이렇게 코드액션으로 extract method로 코드를 깔끔하게 뺄수있다
 
@@ -1785,7 +1788,7 @@ class ApiService {
 
 ### Futures
 
-![image-20231206165749207](C:\Users\han\Desktop\FlutterPractice\assets\image-20231206165749207.png)
+![image-20231206165749207](C:.\assets\image-20231206165749207.png)
 
 - 기존 방법으로는 id가 필요해서 접근이 불가해서 안되고 다른방법 써야함
 
@@ -2201,7 +2204,7 @@ class Episode extends StatelessWidget {
 - Shared preference (flutter에서 만듬) 사용 https://pub.dev/packages/shared_preferences
 - 설치하고 readme에서 사용법이 다 있음
 
-![image-20231212144539455](C:\Users\han\Desktop\FlutterPractice\assets\image-20231212144539455.png)
+![image-20231212144539455](C:.\assets\image-20231212144539455.png)
 
 ```dart
 late SharedPreferences prefs;
