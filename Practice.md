@@ -115,6 +115,7 @@ No issues found!가 출력 되면 다 됐습니다
 // C:.\toonflix
 flutter create 프로젝트이름
 하면 생성이 된다.
+flutter run 안하고 device 선택 후 디버그모드로 실행하면 되는것 같다
 ```
 
 ![image-20231109133846842](C:.\assets\image-20231109133846842.png)
