@@ -1302,6 +1302,7 @@ class WebtoonModel {
   });
   // constructor를 자동완성이든 수동이든 만들어준다
   // 자동완성은 변수위에 전구로 만듬
+  // 결국 dart의 class에서 widget을 extends하면 widget으로 쓰는 것
 }
 
 ```
@@ -1459,8 +1460,9 @@ import 'package:webtoonapp/services/api_service.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-
-  Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
+    
+  // StatelessWidget은 상태를 유지하지 않으므로 모든 인스턴스 필드를 final로 선언해야 합니다.
+  final Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
 
   @override
   Widget build(BuildContext context) {
@@ -1493,6 +1495,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 // 훨씬 간단해짐
+
 ```
 
 ### ListView
