@@ -1,0 +1,88 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "pomodoro_2024",
+      "cwd": "pomodoro_2024",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "pomodoro_2024 (profile mode)",
+      "cwd": "pomodoro_2024",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "pomodoro_2024 (release mode)",
+      "cwd": "pomodoro_2024",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "state_practice_2024",
+      "cwd": "state_practice_2024",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "state_practice_2024 (profile mode)",
+      "cwd": "state_practice_2024",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "state_practice_2024 (release mode)",
+      "cwd": "state_practice_2024",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "toonflix2024",
+      "cwd": "toonflix2024",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "toonflix2024 (profile mode)",
+      "cwd": "toonflix2024",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "toonflix2024 (release mode)",
+      "cwd": "toonflix2024",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "webtoon2024",
+      "cwd": "webtoon2024",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "webtoon2024 (profile mode)",
+      "cwd": "webtoon2024",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "webtoon2024 (release mode)",
+      "cwd": "webtoon2024",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    }
+  ]
+}

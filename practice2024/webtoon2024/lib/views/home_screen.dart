@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webtoon2024/data/api/api_service.dart';
 import 'package:webtoon2024/models/webtoon_model.dart';
+import 'package:webtoon2024/widgets/webtoon_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -30,10 +31,37 @@ class HomeScreen extends StatelessWidget {
         future: webtoons,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const Text("데이터 있음 ㅋㅋ");
+            return Column(
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Expanded(child: makeList(snapshot)),
+              ],
+            );
           }
-          return const Text("로딩중...");
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
+      ),
+    );
+  }
+
+  ListView makeList(AsyncSnapshot<List<WebtoonModel>> snapshot) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      // 방향
+      itemCount: snapshot.data!.length,
+      // 보여지는 개수(숫자 입력하면 그 개수만)
+      itemBuilder: (context, index) {
+        var webtoon = snapshot.data![index];
+        // 인덱스를 통해 데이터 접근 가능
+        return Webtoon(webtoon: webtoon);
+      },
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 40,
       ),
     );
   }

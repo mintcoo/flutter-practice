@@ -1826,7 +1826,7 @@ class _DetailWebtoonState extends State<DetailWebtoon> {
         foregroundColor: Colors.green,
         title: Text(
           widget.webtoon.title,
-          // 2. 이제 별개의 다른 클래스로 구분되어서 기존 webtoon.title에서 widget.webtoon.title로 바뀜
+          // 2. 이제 별개의 다른 클래스로 구분되어서 기존 webtoon.title에서 widget.webtoon.title로 바뀜 (2024년 기준 바꿀필요 x)
           style: const TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.w400,
@@ -1890,7 +1890,7 @@ class _DetailWebtoonState extends State<DetailWebtoon> {
   // widget을 통해 접근해야함 다른 클래스라서
   }
     
-// @@ 홈스크린과는 다른 이유가 거기서는 따로 argument를 요구하지 않았기 때문에 그냥 쓸수있었지만 여기선 필요하므로
+// @@ 홈스크린의 웹툰목록 가져오기와 다른 이유가 거기서는 따로 argument(id)를 요구하지 않았기 때문에 그냥 쓸수있었지만 여기선 필요하므로
 ```
 
 ### Detail Info
@@ -1928,6 +1928,7 @@ class _DetailWebtoonState extends State<DetailWebtoon> {
 
   @override
   Widget build(BuildContext context) {
+      // HomeScreen이 아니기때문에 Scaffold 다시 만들어줌
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

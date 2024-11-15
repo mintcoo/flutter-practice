@@ -2,3 +2,4 @@
 const String baseUrl = "https://webtoon-crawler.nomadcoders.workers.dev";
 // 오늘의 웹툰 Api
 const String today = "today";
+const String id = "id";
