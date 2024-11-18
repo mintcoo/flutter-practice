@@ -44,7 +44,7 @@ final GoRouter router = GoRouter(
               key: UniqueKey(),
               // key: state.pageKey,
               child: DetailScreen(webtoon: webtoon),
-              transitionsBuilder: fadeTransition,
+              transitionsBuilder: slideTransition,
             );
           },
         ),

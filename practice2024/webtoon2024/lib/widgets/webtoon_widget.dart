@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:webtoon2024/models/webtoon_model.dart';
-import 'package:webtoon2024/views/detail_screen.dart';
 
 class Webtoon extends StatelessWidget {
   final WebtoonModel webtoon;
